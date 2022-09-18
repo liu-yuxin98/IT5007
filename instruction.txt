@@ -1,0 +1,22 @@
+    Github repo link and branch name.
+link https://github.com/liu-yuxin98/IT5007
+name liu-yuxin98/IT5007
+
+    Steps to set up your application after cloning/downloading the repository (including steps to add more packages if needed)
+1）
+2）
+
+    How to launch your application
+1) donwload source file locally
+2) check version of packages
+    node -version
+    npx babel --version
+    npm install --save-dev @babel/preset-react
+3) compile App.jsx to App.js
+
+
+
+    mention all features you have implemented.
+
+1) do I need to create a new npm environment instead of using pro-mern-stack-2
+
