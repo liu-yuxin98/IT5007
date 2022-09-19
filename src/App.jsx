@@ -1,4 +1,5 @@
 /*Q1. JS Variable needs to be created here. Below variable is just an example. Try to add more attributes.*/
+// import "bootstrap/dist/css/bootstrap.css";
 
 const initialTravellers = [
   {
@@ -60,6 +61,27 @@ function Display(props) {
   );
 }
 
+function Display_seats(props) {
+  console.log("display seats");
+  console.log(props);
+  let seats_condition = props;
+
+  function tick() {
+    return (
+      <React.Fragment>
+        <h2>It is{new Date().toLocaleTimeString()}</h2>
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <React.Fragment>
+      <h1> Seats </h1>
+      <span>{seats_condition[0]}</span>
+    </React.Fragment>
+  );
+}
+
 class Add extends React.Component {
   constructor() {
     super();
@@ -82,15 +104,15 @@ class Add extends React.Component {
     e.target.reset();
     //check if p_seats in already taken
     if (p_seats >= 10) {
-      book_results = "invalid seats. Enter number between 0 to 9";
+      book_results = "Invalid seats. Enter number between 0 to 9";
       this.setState({ book_results });
       this.props.onBook(0);
     } else if (this.props.state.seats[p_seats] == 1) {
-      book_results = "The seat is occupied";
+      book_results = "The seat is occupied. Try another seats number.";
       this.setState({ book_results });
       this.props.onBook(0);
     } else {
-      book_results = "the seats is not occupied. Book successfull";
+      book_results = "Book successfully";
       this.setState({ book_results });
       // create passenger
       let new_passenger = {
@@ -104,10 +126,12 @@ class Add extends React.Component {
       this.props.onBook(new_passenger);
     }
     console.log("set book results");
+    document.getElementById("add_h1").innerHTML = book_results;
   }
 
   render() {
     console.log("render-add");
+    let results = this.handleSubmit;
 
     return (
       <React.Fragment>
@@ -118,7 +142,7 @@ class Add extends React.Component {
           <input type="text" name="travellerseats" placeholder="SeatsNumber" />
           <button type="submit">Add</button>
         </form>
-        <h1>Results{this.props.state.book_results}</h1>
+        <h1 id="add_h1"></h1>
       </React.Fragment>
     );
   }
@@ -131,10 +155,10 @@ class Delete extends React.Component {
   }
   handleSubmit(e) {
     console.log("delete handleSubmit");
+    let delete_results = 0;
     e.preventDefault();
     /*Q5. Fetch the passenger details from the deletion form and call deleteTraveller()*/
     let p_name = e.target.travellername.value;
-    let travellers = this.props.state.travellers;
     let found = false;
     let removed_passenger = 0;
     for (let i = 0; i < Object.keys(this.props.state.travellers).length; i++) {
@@ -142,6 +166,7 @@ class Delete extends React.Component {
         removed_passenger = this.props.state.travellers[i];
         removed_passenger = this.props.state.travellers.splice(i, 1);
         found = true;
+        delete_results = "Delete successfully";
         break;
       }
     }
@@ -149,18 +174,24 @@ class Delete extends React.Component {
       this.props.onDelete(removed_passenger);
     } else {
       this.props.onDelete(0);
+      delete_results =
+        "Delete Unsuccessfully. Invalid passenger. The passenger is not found in the reservation list.";
     }
+    document.getElementById("delete_h1").innerHTML = delete_results;
   }
 
   render() {
     console.log("render-delete");
     return (
-      <form name="deleteTraveller" onSubmit={this.handleSubmit}>
-        {/*Q5. Placeholder form to enter information on which passenger's ticket needs to be deleted. Below code is just an example.*/}
-        <input type="text" name="travellername" placeholder="Name" />
+      <React.Fragment>
+        <form name="deleteTraveller" onSubmit={this.handleSubmit}>
+          {/*Q5. Placeholder form to enter information on which passenger's ticket needs to be deleted. Below code is just an example.*/}
+          <input type="text" name="travellername" placeholder="Name" />
 
-        <button>Delete</button>
-      </form>
+          <button>Delete</button>
+        </form>
+        <h1 id="delete_h1"></h1>
+      </React.Fragment>
     );
   }
 }
@@ -185,6 +216,7 @@ class Homepage extends React.Component {
       }
     }
     let traveller_table = Display(travellers);
+    let seats_visualization = Display_seats(seats);
 
     return (
       <div>
@@ -197,7 +229,44 @@ class Homepage extends React.Component {
         >
           Display Traveller
         </button>
+        <hr></hr>
         <span id="homepage_span">{traveller_table}</span>
+        <hr></hr>
+        <React.Fragment>
+          <button onClick={() => Display_seats(seats)}>
+            Display Free seats
+          </button>
+          <span>{seats_visualization}</span>
+        </React.Fragment>
+      </div>
+    );
+  }
+}
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
   }
@@ -294,8 +363,9 @@ class TicketToRide extends React.Component {
 
     return (
       <div>
+        <Clock />
         <h1>Ticket To Ride</h1>
-        <h1></h1>
+
         <div>
           {/*Q2. Code for Navigation bar. Use basic buttons to create a nav bar. Use states to manage selection.*/}
           {nav}
