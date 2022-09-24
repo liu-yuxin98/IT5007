@@ -21,18 +21,21 @@ const initialTravellers = [
 let all_travellers = Object.keys(initialTravellers).length;
 function TravellerRow(props) {
   console.log("call TravellerRow()");
+
   {
     /*Q3. Placeholder to initialize local variable based on traveller prop.*/
     var traveller = props;
   }
+  console.log(traveller);
+  let id = String(traveller["id"]);
   return (
-    <tr>
+    <tr key={traveller["id"]}>
       {/*Q3. Placeholder for rendering one row of a table with required traveller attribute values.*/}
-      <td>{traveller["id"]}</td>
-      <td>{traveller["name"]}</td>
-      <td>{traveller["phone"]}</td>
-      <td>{traveller["bookingTime"].toString()}</td>
-      <td>{traveller["Seates_number"]}</td>
+      <td key="t_id">{traveller["id"]}</td>
+      <td key="t_name">{traveller["name"]}</td>
+      <td key="t_phone">{traveller["phone"]}</td>
+      <td key="t_bookingTime">{traveller["bookingTime"].toString()}</td>
+      <td key="t_Seates_number">{traveller["Seates_number"]}</td>
     </tr>
   );
 }
@@ -63,21 +66,37 @@ function Display(props) {
 
 function Display_seats(props) {
   console.log("display seats");
-  console.log(props);
   let seats_condition = props;
-
-  function tick() {
-    return (
-      <React.Fragment>
-        <h2>It is{new Date().toLocaleTimeString()}</h2>
-      </React.Fragment>
-    );
+  let empty = 0;
+  let occupied = 0;
+  for (let i = 0; i < Object.keys(seats_condition).length; i++) {
+    if (seats_condition[i] == 0) {
+      empty += 1;
+    } else {
+      occupied += 1;
+    }
   }
 
+  let empty_seats = Array.from(Array(empty).keys());
+  let occupied_seats = Array.from(Array(occupied).keys());
+  console.log(empty_seats);
+  console.log(occupied_seats);
   return (
     <React.Fragment>
       <h1> Seats </h1>
-      <span>{seats_condition[0]}</span>
+      <i className="fa-regular fa-square"></i>
+      <h4>empty</h4>
+      <hr></hr>
+      <i className="fa-solid fa-square"></i>
+      <h4>reserved</h4>
+      <hr></hr>
+      {empty_seats.map(() => (
+        <i className="fa-regular fa-square"></i>
+      ))}
+      {occupied_seats.map(() => (
+        <i className="fa-solid fa-square"></i>
+      ))}
+      {/* <span>{seats_condition[0]}</span> */}
     </React.Fragment>
   );
 }
@@ -332,6 +351,17 @@ class TicketToRide extends React.Component {
   }
   render() {
     console.log("render-tickettoride");
+    if (typeof document !== "undefined") {
+      console.log("I'm on the web!");
+    } else if (
+      typeof navigator !== "undefined" &&
+      navigator.product === "ReactNative"
+    ) {
+      console.log("I'm in react-native");
+      //
+    } else {
+      console.log("I'm in I'm in node js");
+    }
 
     let content;
     if (this.state.selector == 1) {

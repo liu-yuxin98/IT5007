@@ -12,11 +12,18 @@ name liu-yuxin98/IT5007
     node -version
     npx babel --version
     npm install --save-dev @babel/preset-react
+
 3) compile App.jsx to App.js
 
 
 
     mention all features you have implemented.
+1) Code the variable for storing traveller data. -> accomplished
+2) displayHomepage,Navbar,displays the total number of empty seats --> accomplished
+3) displayTraveller --> accomplished
+4) addTraveller  --> accomplished
+5) deletTraveller --> accomplished
+6)
 
-1) do I need to create a new npm environment instead of using pro-mern-stack-2
+other features: --> made a clock to show current time
 
