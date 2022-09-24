@@ -2,19 +2,45 @@
 link https://github.com/liu-yuxin98/IT5007
 name liu-yuxin98/IT5007
 
-    Steps to set up your application after cloning/downloading the repository (including steps to add more packages if needed)
-1）
-2）
+ Steps to set up your application after cloning/downloading the repository (including steps to add more packages if needed)
+1) git clone https://github.com/liu-yuxin98/IT5007.git  #clone IT5007 to your local laptop
+2) cd IT5007  # cd into IT5007 folder
 
-    How to launch your application
-1) donwload source file locally
-2) check version of packages
-    node -version
-    npx babel --version
-    npm install --save-dev @babel/preset-react
+Install node and npm and nvm
+3) node -v # check if you have node installed, if node is not installed you should install node first. go through https://nodejs.org/en/download/
+Install npm
+4) sudo apt install npm   # after you have node successully installed you should install npm
+# make sure you have correct node version v16.17.0
+5) nvm --version # check if you have nvm installed, if not go through https://heynode.com/tutorial/install-nodejs-locally-nvm/
 
-3) compile App.jsx to App.js
+Install packages
+5)// download all package
+npm install express
+npm install nodemon
+npm install --save-dev @babel/core@7 @babel/cli@7
+npm install --save-dev @babel/preset-react@7
+npm install --save-dev @babel/preset-env@7
+npm install --save-dev bootstrap@5.2.1
 
+Check packages
+6)npm ls  # make sure you see all the following list packages
++-- @babel/cli@7.18.10
++-- @babel/core@7.19.1
++-- @babel/preset-env@7.19.1
++-- @babel/preset-react@7.18.6
++-- @fortawesome/fontawesome-svg-core@6.2.0
++-- @fortawesome/free-regular-svg-icons@6.2.0
++-- @fortawesome/free-solid-svg-icons@6.2.0
++-- @fortawesome/react-fontawesome@0.2.0
++-- bootstrap@5.2.1
++-- express@4.18.1
+`-- nodemon@2.0.20
+
+How to launch your application
+
+1) npm start
+2) go to you web browesr and type in localhost:/3000 and you can see the following pages web.jpg
+3) if you can see a webpage like web.jpg then you successfully launch the app!
 
 
     mention all features you have implemented.
@@ -23,7 +49,6 @@ name liu-yuxin98/IT5007
 3) displayTraveller --> accomplished
 4) addTraveller  --> accomplished
 5) deletTraveller --> accomplished
-6)
+6) dynamic visualization seats --> accomplished
 
 other features: --> made a clock to show current time
-
